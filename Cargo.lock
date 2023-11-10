@@ -1708,25 +1708,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "common-greptimedb-telemetry"
-version = "0.4.2"
-dependencies = [
- "async-trait",
- "common-error",
- "common-runtime",
- "common-telemetry",
- "common-test-util",
- "common-version",
- "hyper",
- "reqwest",
- "serde",
- "serde_json",
- "tempfile",
- "tokio",
- "uuid",
-]
-
-[[package]]
 name = "common-grpc"
 version = "0.4.2"
 dependencies = [
@@ -2675,7 +2656,6 @@ dependencies = [
  "common-datasource",
  "common-error",
  "common-function",
- "common-greptimedb-telemetry",
  "common-grpc",
  "common-grpc-expr",
  "common-macro",
@@ -4709,7 +4689,6 @@ dependencies = [
  "common-base",
  "common-catalog",
  "common-error",
- "common-greptimedb-telemetry",
  "common-grpc",
  "common-grpc-expr",
  "common-macro",

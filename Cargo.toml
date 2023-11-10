@@ -13,7 +13,6 @@ members = [
     "src/common/error",
     "src/common/function",
     "src/common/macro",
-    "src/common/greptimedb-telemetry",
     "src/common/grpc",
     "src/common/grpc-expr",
     "src/common/mem-prof",
@@ -136,7 +135,6 @@ common-config = { path = "src/common/config" }
 common-datasource = { path = "src/common/datasource" }
 common-error = { path = "src/common/error" }
 common-function = { path = "src/common/function" }
-common-greptimedb-telemetry = { path = "src/common/greptimedb-telemetry" }
 common-grpc = { path = "src/common/grpc" }
 common-grpc-expr = { path = "src/common/grpc-expr" }
 common-macro = { path = "src/common/macro" }

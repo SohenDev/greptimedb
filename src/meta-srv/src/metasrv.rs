@@ -20,7 +20,6 @@ use std::time::Duration;
 
 use api::v1::meta::Peer;
 use common_base::Plugins;
-use common_greptimedb_telemetry::GreptimeDBTelemetryTask;
 use common_grpc::channel_manager;
 use common_meta::ddl::DdlTaskExecutorRef;
 use common_meta::key::TableMetadataManagerRef;
@@ -39,8 +38,7 @@ use tokio::sync::broadcast::error::RecvError;
 use crate::cluster::MetaPeerClientRef;
 use crate::election::{Election, LeaderChangeMessage};
 use crate::error::{
-    self, InitMetadataSnafu, Result, StartProcedureManagerSnafu, StartTelemetryTaskSnafu,
-    StopProcedureManagerSnafu,
+    self, InitMetadataSnafu, Result, StartProcedureManagerSnafu, StopProcedureManagerSnafu,
 };
 use crate::failure_detector::PhiAccrualFailureDetectorOptions;
 use crate::handler::HeartbeatHandlerGroup;
@@ -181,7 +179,6 @@ pub type ElectionRef = Arc<dyn Election<Leader = LeaderValue>>;
 pub struct MetaStateHandler {
     procedure_manager: ProcedureManagerRef,
     subscribe_manager: Option<SubscribeManagerRef>,
-    greptimedb_telemetry_task: Arc<GreptimeDBTelemetryTask>,
     leader_cached_kv_backend: Arc<LeaderCachedKvBackend>,
     state: StateRef,
 }
@@ -199,7 +196,6 @@ impl MetaStateHandler {
         if let Err(e) = self.procedure_manager.start().await {
             error!(e; "Failed to start procedure manager");
         }
-        self.greptimedb_telemetry_task.should_report(true);
     }
 
     pub async fn on_become_follower(&self) {
@@ -210,7 +206,6 @@ impl MetaStateHandler {
             error!(e; "Failed to stop procedure manager");
         }
         // Suspends reporting.
-        self.greptimedb_telemetry_task.should_report(false);
 
         if let Some(sub_manager) = self.subscribe_manager.clone() {
             info!("Leader changed, un_subscribe all");
@@ -241,7 +236,6 @@ pub struct MetaSrv {
     mailbox: MailboxRef,
     ddl_executor: DdlTaskExecutorRef,
     table_metadata_manager: TableMetadataManagerRef,
-    greptimedb_telemetry_task: Arc<GreptimeDBTelemetryTask>,
 
     plugins: Plugins,
 }
@@ -265,12 +259,7 @@ impl MetaSrv {
             let leader_cached_kv_backend = self.leader_cached_kv_backend.clone();
             let subscribe_manager = self.subscribe_manager();
             let mut rx = election.subscribe_leader_change();
-            let greptimedb_telemetry_task = self.greptimedb_telemetry_task.clone();
-            greptimedb_telemetry_task
-                .start()
-                .context(StartTelemetryTaskSnafu)?;
             let state_handler = MetaStateHandler {
-                greptimedb_telemetry_task,
                 subscribe_manager,
                 procedure_manager,
                 state: self.state.clone(),

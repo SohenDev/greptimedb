@@ -21,7 +21,6 @@ use catalog::kvbackend::MetaKvBackend;
 use catalog::memory::MemoryCatalogManager;
 use common_base::Plugins;
 use common_error::ext::BoxedError;
-use common_greptimedb_telemetry::GreptimeDBTelemetryTask;
 use common_meta::key::datanode_table::DatanodeTableManager;
 use common_meta::kv_backend::KvBackendRef;
 pub use common_procedure::options::ProcedureConfig;
@@ -56,7 +55,6 @@ use crate::event_listener::{
     new_region_server_event_channel, NoopRegionServerEventListener, RegionServerEventListenerRef,
     RegionServerEventReceiver,
 };
-use crate::greptimedb_telemetry::get_greptimedb_telemetry_task;
 use crate::heartbeat::{new_metasrv_client, HeartbeatTask};
 use crate::region_server::RegionServer;
 use crate::server::Services;
@@ -71,7 +69,6 @@ pub struct Datanode {
     heartbeat_task: Option<HeartbeatTask>,
     region_event_receiver: Option<RegionServerEventReceiver>,
     region_server: RegionServer,
-    greptimedb_telemetry_task: Arc<GreptimeDBTelemetryTask>,
     leases_notifier: Option<Arc<Notify>>,
     plugins: Plugins,
 }
@@ -83,7 +80,6 @@ impl Datanode {
         self.start_heartbeat().await?;
         self.wait_coordinated().await;
 
-        let _ = self.greptimedb_telemetry_task.start();
         self.start_services().await
     }
 
@@ -124,7 +120,6 @@ impl Datanode {
     pub async fn shutdown(&self) -> Result<()> {
         // We must shutdown services first
         self.shutdown_services().await?;
-        let _ = self.greptimedb_telemetry_task.stop().await;
         if let Some(heartbeat_task) = &self.heartbeat_task {
             heartbeat_task
                 .close()
@@ -242,13 +237,6 @@ impl DatanodeBuilder {
             Mode::Standalone => None,
         };
 
-        let greptimedb_telemetry_task = get_greptimedb_telemetry_task(
-            Some(self.opts.storage.data_home.clone()),
-            mode,
-            self.opts.enable_telemetry,
-        )
-        .await;
-
         let leases_notifier =
             if self.opts.require_lease_before_startup && matches!(mode, Mode::Distributed) {
                 Some(Arc::new(Notify::new()))
@@ -261,7 +249,6 @@ impl DatanodeBuilder {
             services,
             heartbeat_task,
             region_server,
-            greptimedb_telemetry_task,
             region_event_receiver,
             leases_notifier,
             plugins: self.plugins.clone(),

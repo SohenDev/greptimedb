@@ -20,7 +20,6 @@ pub mod config;
 pub mod datanode;
 pub mod error;
 pub mod event_listener;
-mod greptimedb_telemetry;
 pub mod heartbeat;
 pub mod metrics;
 pub mod region_server;

@@ -32,7 +32,6 @@ use common_procedure::ProcedureManagerRef;
 use crate::cache_invalidator::MetasrvCacheInvalidator;
 use crate::cluster::{MetaPeerClientBuilder, MetaPeerClientRef};
 use crate::error::Result;
-use crate::greptimedb_telemetry::get_greptimedb_telemetry_task;
 use crate::handler::check_leader_handler::CheckLeaderHandler;
 use crate::handler::collect_stats_handler::CollectStatsHandler;
 use crate::handler::failure_handler::RegionFailureHandler;
@@ -253,9 +252,6 @@ impl MetaSrvBuilder {
             }
         };
 
-        let enable_telemetry = options.enable_telemetry;
-        let metasrv_home = options.data_home.to_string();
-
         Ok(MetaSrv {
             state,
             started,
@@ -273,12 +269,6 @@ impl MetaSrvBuilder {
             mailbox,
             ddl_executor: ddl_manager,
             table_metadata_manager,
-            greptimedb_telemetry_task: get_greptimedb_telemetry_task(
-                Some(metasrv_home),
-                meta_peer_client,
-                enable_telemetry,
-            )
-            .await,
             plugins: plugins.unwrap_or_else(Plugins::default),
         })
     }

@@ -12,10 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod column_def;
+#[allow(clippy::large_enum_variant)]
+pub mod v1;
 
-pub mod meta {
-    pub use common_proto::v1::meta::*;
+pub mod prometheus {
+    pub mod remote {
+        tonic::include_proto!("prometheus");
+    }
 }
 
-pub use common_proto::v1::*;
+pub mod substrait_extension {
+    tonic::include_proto!("substrait_extension");
+}

@@ -51,6 +51,7 @@ members = [
     "src/storage",
     "src/store-api",
     "src/table",
+    "src/common/proto",
     "tests-integration",
     "tests/runner",
 ]
@@ -83,7 +84,6 @@ derive_builder = "0.12"
 etcd-client = "0.12"
 futures = "0.3"
 futures-util = "0.3"
-greptime-proto = { git = "https://github.com/GreptimeTeam/greptime-proto.git", rev = "7eb2e78be7a104d2582fbea0bcb1e019407da702" }
 humantime-serde = "1.1"
 itertools = "0.10"
 lazy_static = "1.4"
@@ -145,6 +145,7 @@ common-meta = { path = "src/common/meta" }
 common-pprof = { path = "src/common/pprof" }
 common-procedure = { path = "src/common/procedure" }
 common-procedure-test = { path = "src/common/procedure-test" }
+common-proto = { path = "src/common/proto" }
 common-query = { path = "src/common/query" }
 common-recordbatch = { path = "src/common/recordbatch" }
 common-runtime = { path = "src/common/runtime" }

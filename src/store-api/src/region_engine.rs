@@ -16,7 +16,7 @@
 
 use std::sync::Arc;
 
-use api::greptime_proto::v1::meta::RegionRole as PbRegionRole;
+use api::common_proto::v1::meta::RegionRole as PbRegionRole;
 use async_trait::async_trait;
 use common_error::ext::BoxedError;
 use common_query::Output;

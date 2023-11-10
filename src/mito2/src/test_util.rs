@@ -24,7 +24,7 @@ use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
 
-use api::greptime_proto::v1;
+use api::common_proto::v1;
 use api::helper::ColumnDataTypeWrapper;
 use api::v1::value::ValueData;
 use api::v1::{OpType, Row, Rows, SemanticType};
@@ -364,7 +364,7 @@ impl CreateRequestBuilder {
     }
 }
 
-// TODO(yingwen): Support conversion in greptime-proto.
+// TODO(yingwen): Support conversion in common-proto.
 /// Creates value for i64.
 #[cfg(test)]
 pub(crate) fn i64_value(data: i64) -> v1::Value {

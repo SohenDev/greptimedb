@@ -17,11 +17,11 @@ pub mod helper;
 
 pub mod prom_store {
     pub mod remote {
-        pub use greptime_proto::prometheus::remote::*;
+        pub use common_proto::prometheus::remote::*;
     }
 }
 
 pub mod v1;
 
-pub use greptime_proto;
+pub use common_proto;
 pub use prost::DecodeError;

@@ -201,9 +201,9 @@ dependencies = [
  "common-base",
  "common-error",
  "common-macro",
+ "common-proto",
  "common-time",
  "datatypes",
- "greptime-proto",
  "paste",
  "prost 0.12.1",
  "snafu",
@@ -1872,6 +1872,19 @@ version = "0.4.2"
 dependencies = [
  "async-trait",
  "common-procedure",
+]
+
+[[package]]
+name = "common-proto"
+version = "0.1.0"
+dependencies = [
+ "prost 0.12.1",
+ "serde",
+ "serde_json",
+ "strum 0.25.0",
+ "strum_macros 0.25.3",
+ "tonic 0.10.2",
+ "tonic-build 0.10.2",
 ]
 
 [[package]]
@@ -3609,20 +3622,6 @@ name = "glob"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2fabcfbdc87f4758337ca535fb41a6d701b65693ce38287d856d1674551ec9b"
-
-[[package]]
-name = "greptime-proto"
-version = "0.1.0"
-source = "git+https://github.com/GreptimeTeam/greptime-proto.git?rev=7eb2e78be7a104d2582fbea0bcb1e019407da702#7eb2e78be7a104d2582fbea0bcb1e019407da702"
-dependencies = [
- "prost 0.12.1",
- "serde",
- "serde_json",
- "strum 0.25.0",
- "strum_macros 0.25.3",
- "tonic 0.10.2",
- "tonic-build 0.10.2",
-]
 
 [[package]]
 name = "h2"
@@ -6361,12 +6360,12 @@ dependencies = [
  "common-catalog",
  "common-error",
  "common-macro",
+ "common-proto",
  "common-recordbatch",
  "common-telemetry",
  "datafusion",
  "datatypes",
  "futures",
- "greptime-proto",
  "lazy_static",
  "prometheus",
  "promql-parser",
@@ -6675,6 +6674,7 @@ dependencies = [
  "common-function",
  "common-macro",
  "common-meta",
+ "common-proto",
  "common-query",
  "common-recordbatch",
  "common-telemetry",
@@ -6689,7 +6689,6 @@ dependencies = [
  "format_num",
  "futures",
  "futures-util",
- "greptime-proto",
  "humantime",
  "lazy_static",
  "num",

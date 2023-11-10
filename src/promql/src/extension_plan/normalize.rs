@@ -34,7 +34,7 @@ use datatypes::arrow::datatypes::SchemaRef;
 use datatypes::arrow::error::Result as ArrowResult;
 use datatypes::arrow::record_batch::RecordBatch;
 use futures::{Stream, StreamExt};
-use greptime_proto::substrait_extension as pb;
+use common_proto::substrait_extension as pb;
 use prost::Message;
 use snafu::ResultExt;
 

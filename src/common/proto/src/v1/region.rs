@@ -12,10 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod column_def;
+tonic::include_proto!("greptime.v1.region");
 
-pub mod meta {
-    pub use common_proto::v1::meta::*;
+#[cfg(test)]
+mod test {
+    use crate::v1::region::region_request::Body as RegionRequest;
+    use crate::v1::region::InsertRequests;
+
+    #[test]
+    fn test_region_request_name() {
+        let request = RegionRequest::Inserts(InsertRequests { requests: vec![] });
+        assert_eq!("Inserts", request.as_ref());
+    }
 }
-
-pub use common_proto::v1::*;

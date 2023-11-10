@@ -12,10 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod column_def;
+tonic::include_proto!("greptime.v1");
 
-pub mod meta {
-    pub use common_proto::v1::meta::*;
+use crate::v1::value::ValueData;
+
+pub const GREPTIME_GRPC_DESC: &[u8] = tonic::include_file_descriptor_set!("greptime_grpc_desc");
+
+pub mod meta;
+pub mod region;
+
+impl From<ValueData> for Value {
+    fn from(value: ValueData) -> Self {
+        Value {
+            value_data: Some(value),
+        }
+    }
 }
-
-pub use common_proto::v1::*;

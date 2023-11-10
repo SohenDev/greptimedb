@@ -37,7 +37,7 @@ use datafusion_expr::{Extension, LogicalPlan, UserDefinedLogicalNodeCore};
 use datafusion_physical_expr::PhysicalSortExpr;
 use datatypes::schema::{Schema, SchemaRef};
 use futures_util::StreamExt;
-use greptime_proto::v1::region::{QueryRequest, RegionRequestHeader};
+use common_proto::v1::region::{QueryRequest, RegionRequestHeader};
 use snafu::ResultExt;
 use store_api::storage::RegionId;
 use tokio::time::Instant;

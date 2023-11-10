@@ -20,5 +20,5 @@ use api::v1::OpType;
 /// as a sequence number.
 pub type SequenceNumber = u64;
 
-// TODO(hl): We should implement a `min` method for OpType in greptime-proto crate.
+// TODO(hl): We should implement a `min` method for OpType in common-proto crate.
 pub const MIN_OP_TYPE: OpType = OpType::Delete;

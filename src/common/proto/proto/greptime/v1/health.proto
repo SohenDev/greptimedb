@@ -12,10 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod column_def;
+syntax = "proto3";
 
-pub mod meta {
-    pub use common_proto::v1::meta::*;
+package greptime.v1;
+
+option java_package = "io.greptime.v1";
+option java_outer_classname = "Health";
+option go_package = "github.com/GreptimeTeam/greptime-proto/go/greptime/v1";
+
+service HealthCheck {
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
 }
 
-pub use common_proto::v1::*;
+message HealthCheckRequest {}
+
+message HealthCheckResponse {}

@@ -34,11 +34,11 @@ use datatypes::vectors::{
     TimestampMillisecondVector, TimestampNanosecondVector, TimestampSecondVector, UInt32Vector,
     UInt64Vector, VectorRef,
 };
-use greptime_proto::v1::ddl_request::Expr;
-use greptime_proto::v1::greptime_request::Request;
-use greptime_proto::v1::query_request::Query;
-use greptime_proto::v1::value::ValueData;
-use greptime_proto::v1::{self, DdlRequest, IntervalMonthDayNano, QueryRequest, Row, SemanticType};
+use common_proto::v1::ddl_request::Expr;
+use common_proto::v1::greptime_request::Request;
+use common_proto::v1::query_request::Query;
+use common_proto::v1::value::ValueData;
+use common_proto::v1::{self, DdlRequest, IntervalMonthDayNano, QueryRequest, Row, SemanticType};
 use snafu::prelude::*;
 
 use crate::error::{self, Result};

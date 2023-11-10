@@ -34,7 +34,7 @@ use datafusion::physical_plan::{
 use datatypes::arrow::compute;
 use datatypes::arrow::error::Result as ArrowResult;
 use futures::{Stream, StreamExt};
-use greptime_proto::substrait_extension as pb;
+use common_proto::substrait_extension as pb;
 use prost::Message;
 use snafu::ResultExt;
 

@@ -3,11 +3,11 @@ name = "cmd"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-default-run = "greptime"
+default-run = "engram"
 
 [[bin]]
-name = "greptime"
-path = "src/bin/greptime.rs"
+name = "engram"
+path = "src/bin/engram.rs"
 
 [features]
 tokio-console = ["common-telemetry/tokio-console"]
@@ -16,6 +16,7 @@ tokio-console = ["common-telemetry/tokio-console"]
 anymap = "1.0.0-beta.2"
 async-trait.workspace = true
 auth.workspace = true
+backtrace = "0.3"
 catalog.workspace = true
 chrono.workspace = true
 clap = { version = "3.1", features = ["derive"] }
@@ -43,6 +44,7 @@ futures.workspace = true
 lazy_static.workspace = true
 meta-client.workspace = true
 meta-srv.workspace = true
+metrics.workspace = true
 mito2.workspace = true
 nu-ansi-term = "0.46"
 partition.workspace = true
@@ -62,6 +64,9 @@ substrait.workspace = true
 table.workspace = true
 tokio.workspace = true
 toml.workspace = true
+tracing = "0.1"
+tracing-appender = "0.2"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [target.'cfg(not(windows))'.dependencies]
 tikv-jemallocator = "0.5"

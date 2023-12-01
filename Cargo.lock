@@ -1538,6 +1538,7 @@ dependencies = [
  "anymap",
  "async-trait",
  "auth",
+ "backtrace",
  "catalog",
  "chrono",
  "clap 3.2.25",
@@ -1565,6 +1566,7 @@ dependencies = [
  "lazy_static",
  "meta-client",
  "meta-srv",
+ "metrics",
  "mito2",
  "nu-ansi-term",
  "partition",
@@ -1587,6 +1589,9 @@ dependencies = [
  "tikv-jemallocator",
  "tokio",
  "toml 0.7.8",
+ "tracing",
+ "tracing-appender",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -3988,7 +3993,7 @@ dependencies = [
  "console",
  "instant",
  "number_prefix",
- "portable-atomic",
+ "portable-atomic 1.5.0",
  "unicode-width",
 ]
 
@@ -4775,6 +4780,28 @@ dependencies = [
  "snafu",
  "store-api",
  "tokio",
+]
+
+[[package]]
+name = "metrics"
+version = "0.20.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b9b8653cec6897f73b519a43fba5ee3d50f62fe9af80b428accdcc093b4a849"
+dependencies = [
+ "ahash 0.7.7",
+ "metrics-macros",
+ "portable-atomic 0.3.20",
+]
+
+[[package]]
+name = "metrics-macros"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "731f8ecebd9f3a4aa847dfe75455e4757a45da40a7793d2f0b1f9b6ed18b23f3"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
 ]
 
 [[package]]
@@ -6112,6 +6139,15 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 1.0.109",
+]
+
+[[package]]
+name = "portable-atomic"
+version = "0.3.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e30165d31df606f5726b090ec7592c308a0eaf61721ff64c9a3018e344a8753e"
+dependencies = [
+ "portable-atomic 1.5.0",
 ]
 
 [[package]]
